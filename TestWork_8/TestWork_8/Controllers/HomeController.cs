@@ -29,7 +29,7 @@ namespace TestWork_8.Controllers
         {
             var them = _context.Themses
                 .Include(t => t.User)
-                .OrderByDescending(r => r.Id);
+                .OrderByDescending(r => r.DateCreateThem.Date);
 
             return View(them.ToList());
         }
