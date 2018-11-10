@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestWork_8.Models
 {
@@ -13,7 +12,6 @@ namespace TestWork_8.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
-        public List<Comment> CommentsList { get; set; }
-        public int Count { get; set; }
+        public List<Thems> ThemsesList { get; set; }
     }
 }

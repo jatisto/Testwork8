@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using TestWork_8.Data;
 
-namespace TestWork_8.Migrations
+namespace TestWork_8.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181110104352_AddPropertyList")]
+    partial class AddPropertyList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,8 +189,6 @@ namespace TestWork_8.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("Count");
-
                     b.Property<string>("NameThemsComment");
 
                     b.Property<string>("ThemsId");
@@ -212,15 +211,17 @@ namespace TestWork_8.Migrations
 
                     b.Property<string>("ContentThems");
 
-                    b.Property<int>("Count");
-
                     b.Property<DateTime>("DateCreateThem");
 
                     b.Property<string>("NameThem");
 
+                    b.Property<string>("ThemsId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ThemsId");
 
                     b.HasIndex("UserId");
 
@@ -275,7 +276,7 @@ namespace TestWork_8.Migrations
             modelBuilder.Entity("TestWork_8.Models.Comment", b =>
                 {
                     b.HasOne("TestWork_8.Models.Thems", "Thems")
-                        .WithMany("CommentsList")
+                        .WithMany()
                         .HasForeignKey("ThemsId");
 
                     b.HasOne("TestWork_8.Models.ApplicationUser", "User")
@@ -285,6 +286,10 @@ namespace TestWork_8.Migrations
 
             modelBuilder.Entity("TestWork_8.Models.Thems", b =>
                 {
+                    b.HasOne("TestWork_8.Models.Thems")
+                        .WithMany("ThemsesList")
+                        .HasForeignKey("ThemsId");
+
                     b.HasOne("TestWork_8.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
