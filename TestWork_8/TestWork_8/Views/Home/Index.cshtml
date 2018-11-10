@@ -1,11 +1,59 @@
-﻿@{
+﻿@model IEnumerable<Thems>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 
 <div class="row">
     <div class="col-lg-12">
-        <a href="/Home/CreateThem" style="text-decoration: none"><h3>Создать тему</h3></a>
+        <a href="/Home/Create" style="text-decoration: none">
+            <h3>Создать тему</h3>
+        </a>
     </div>
 </div>
 
+<div class="col-sm-12 col-lg-12 col-md-12">
+    <div class="thumbnail" style="padding: 20px">
+
+
+        @foreach (var item in Model)
+        {
+            
+            <dl class="dl-horizontal">
+                <dt style=" color: darkslategrey">
+                    <h5 style=" color: darkslategrey">Создатель сия темы</h5>
+                </dt>
+                <dd>
+
+                    <h4 style="color: crimson">@Html.DisplayFor(modelItem => item.User.UserName)</h4>
+
+                </dd>
+                <dt style=" color: darkslategrey">
+                    <h4 style=" color: darkslategrey">Название</h4>
+                </dt>
+                <dd>
+                    <h4 style="color: crimson">@Html.DisplayFor(modelItem => item.NameThem)</h4>
+                </dd>
+                <dt style=" color: darkslategrey">
+                    <h4 style=" color: darkslategrey">Содержание</h4>
+                </dt>
+                <dd>
+                    <h4 style="color: darkgrey">@Html.DisplayFor(modelItem => item.ContentThems)</h4>
+                </dd>
+                <dt style="color: darkslategrey">
+                    <h4 style=" color: darkslategrey">Дата создания</h4>
+                </dt>
+                <dd>
+                    <h4 style="color: darkgrey">@Html.DisplayFor(modelItem => item.DateCreateThem)</h4>
+                </dd>
+
+            </dl>
+            <hr/>
+            
+        }
+
+    </div>
+
+
+</div>
