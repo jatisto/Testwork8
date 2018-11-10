@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using TestWork_8.Data;
 
-namespace TestWork_8.Data.Migrations
+namespace TestWork_8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181110104352_AddPropertyList")]
-    partial class AddPropertyList
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

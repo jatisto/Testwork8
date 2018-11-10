@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using TestWork_8.Data;
 
-namespace TestWork_8.Data.Migrations
+namespace TestWork_8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181110061755_AddThems")]
-    partial class AddThems
+    [Migration("20181110123155_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,6 +180,30 @@ namespace TestWork_8.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TestWork_8.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CommentDate");
+
+                    b.Property<string>("Content");
+
+                    b.Property<string>("NameThemsComment");
+
+                    b.Property<string>("ThemsId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThemsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("TestWork_8.Models.Thems", b =>
                 {
                     b.Property<string>("Id")
@@ -191,9 +215,13 @@ namespace TestWork_8.Data.Migrations
 
                     b.Property<string>("NameThem");
 
+                    b.Property<string>("ThemsId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ThemsId");
 
                     b.HasIndex("UserId");
 
@@ -245,8 +273,23 @@ namespace TestWork_8.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("TestWork_8.Models.Comment", b =>
+                {
+                    b.HasOne("TestWork_8.Models.Thems", "Thems")
+                        .WithMany()
+                        .HasForeignKey("ThemsId");
+
+                    b.HasOne("TestWork_8.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("TestWork_8.Models.Thems", b =>
                 {
+                    b.HasOne("TestWork_8.Models.Thems")
+                        .WithMany("ThemsesList")
+                        .HasForeignKey("ThemsId");
+
                     b.HasOne("TestWork_8.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
