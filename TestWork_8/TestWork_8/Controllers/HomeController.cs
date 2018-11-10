@@ -15,9 +15,9 @@ namespace TestWork_8.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult CreateThem()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Вы создаёте тему";
 
             return View();
         }
