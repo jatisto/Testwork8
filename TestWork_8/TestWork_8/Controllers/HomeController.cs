@@ -39,29 +39,30 @@ namespace TestWork_8.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
+//            var themS = _context.Themses.FirstOrDefault(c => c.NameThem == comment.NameThemsComment);
             ViewBag.CommentList = _context.Comments
                 .Include(t => t.User)
-                .OrderByDescending(c => c.Content);
+                .OrderBy(c => c.Content);
+
             if (id == null)
             {
                 return NotFound();
             }
 
             var thems = await _context.Themses
+                .Where(t => t.Id == id)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (thems == null)
-            {
-                return NotFound();
-            }
+
 
             return View(thems);
         }
 
         #endregion
 
+
         #region Create
 
-       public IActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -72,7 +73,6 @@ namespace TestWork_8.Controllers
         public async Task<IActionResult> Create([Bind("UserId,NameThem,ContentThems,DateCreateThem")]
             Thems thems)
         {
-
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -99,7 +99,8 @@ namespace TestWork_8.Controllers
                 Id = thems.UserId,
                 NameThem = thems.NameThem,
                 ContentThems = thems.ContentThems,
-                DateCreateThem = DateTime.Today.Date
+                DateCreateThem = DateTime.Now,
+                Count = +1
             };
 
             return tms;
@@ -114,6 +115,7 @@ namespace TestWork_8.Controllers
         public async Task<IActionResult> Comment(string themsId, string userId, string content, Comment comment)
         {
             var themS = _context.Themses.FirstOrDefault(c => c.Id == comment.ThemsId);
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -123,10 +125,12 @@ namespace TestWork_8.Controllers
                     ThemsId = themsId,
                     Content = content,
                     NameThemsComment = themS.NameThem,
-                    CommentDate = DateTime.Today.Date
+                    CommentDate = DateTime.Now
                 };
 
+
                 comm.UserId = user.Id;
+                comm.Count++;
                 _context.Add(comm);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -134,6 +138,7 @@ namespace TestWork_8.Controllers
 
             return View();
         }
+
         #endregion
 
         #region ShowComment
@@ -151,7 +156,6 @@ namespace TestWork_8.Controllers
 
             return Redirect("Details");
         }
-
 
         #endregion
     }

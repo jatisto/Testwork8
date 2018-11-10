@@ -15,5 +15,6 @@ namespace TestWork_8.Models
         public string Content { get; set; }
         public DateTime CommentDate { get; set; }
         public string NameThemsComment { get; set; }
+        public int Count { get; set; }
     }
 }

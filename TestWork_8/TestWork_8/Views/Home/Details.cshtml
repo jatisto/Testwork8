@@ -25,11 +25,12 @@
 
 
 <div class="row">
+
     @foreach (Comment item in ViewBag.CommentList)
     {
-        <p>@item.User.UserName</p>
+        <h5>@item.User.UserName</h5>
         <h4 style="color: cadetblue"> @item.Content</h4>
-
+        <p style="color: darkgrey">@item.CommentDate</p>
         <br/>
     }
 </div>
