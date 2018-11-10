@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -71,19 +72,14 @@ namespace TestWork_8.Controllers
         public async Task<IActionResult> Create([Bind("UserId,NameThem,ContentThems,DateCreateThem")]
             Thems thems)
         {
-            var them = _context.Themses.FirstOrDefault(c => c.Id == thems.Id);
-            if (them != null)
-            {
-                thems.UserId = them.UserId;
-                thems.NameThem = them.NameThem;
-                thems.ContentThems = them.ContentThems;
-
-            }
-
 
             if (ModelState.IsValid)
             {
-                _context.Add(thems);
+                var user = await _userManager.GetUserAsync(User);
+                var createThems = CreateThems(thems);
+                createThems.UserId = user.Id;
+
+                _context.Add(createThems);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -93,6 +89,24 @@ namespace TestWork_8.Controllers
 
         #endregion
 
-        
+
+        #region CreateThems
+
+        private Thems CreateThems(Thems thems)
+        {
+            var tms = new Thems()
+            {
+                Id = thems.UserId,
+                NameThem = thems.NameThem,
+                ContentThems = thems.ContentThems,
+                DateCreateThem = DateTime.Today.Date
+            };
+
+            return tms;
+        }
+
+        #endregion
+
+
     }
 }
