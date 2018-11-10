@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TestWork_8.Models
 {
@@ -10,5 +11,7 @@ namespace TestWork_8.Models
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+
+        public List<Thems> ThemsesList { get; set; }
     }
 }

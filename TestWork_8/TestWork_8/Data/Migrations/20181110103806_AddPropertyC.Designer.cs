@@ -11,9 +11,10 @@ using TestWork_8.Data;
 namespace TestWork_8.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181110103806_AddPropertyC")]
+    partial class AddPropertyC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,13 +215,9 @@ namespace TestWork_8.Data.Migrations
 
                     b.Property<string>("NameThem");
 
-                    b.Property<string>("ThemsId");
-
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ThemsId");
 
                     b.HasIndex("UserId");
 
@@ -285,10 +282,6 @@ namespace TestWork_8.Data.Migrations
 
             modelBuilder.Entity("TestWork_8.Models.Thems", b =>
                 {
-                    b.HasOne("TestWork_8.Models.Thems")
-                        .WithMany("ThemsesList")
-                        .HasForeignKey("ThemsId");
-
                     b.HasOne("TestWork_8.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");

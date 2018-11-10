@@ -33,7 +33,7 @@
                     <h4 style=" color: darkslategrey">Название</h4>
                 </dt>
                 <dd>
-                    <h4 style="color: crimson">@Html.DisplayFor(modelItem => item.NameThem)</h4>
+                    <a href="/Home/Details/@item.Id" style="text-decoration: none"><h4 style="color: crimson">@Html.DisplayFor(modelItem => item.NameThem)</h4></a>
                 </dd>
                 <dt style=" color: darkslategrey">
                     <h4 style=" color: darkslategrey">Содержание</h4>
@@ -57,3 +57,4 @@
 
 
 </div>
+

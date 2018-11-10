@@ -34,34 +34,34 @@ namespace TestWork_8.Controllers
             return View(them.ToList());
         }
 
-        public IActionResult CreateThem(string userId, string nameThem, string contentThem, Thems thems)
-        {
-//            var them = _context.Themses.FirstOrDefault(c => c.UserId == userId);
-            if (ModelState.IsValid)
-            {
-                var user = _userManager.GetUserAsync(User);
-                var thm = new Thems
-                {
-                    UserId = userId,
-                    NameThem = nameThem,
-                    ContentThems = contentThem,
-                    DateCreateThem = DateTime.Now
-                };
 
-                thm.UserId = user.Result.Id;
-                _context.Add(thm);
-                _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+        #region Details
+
+        public async Task<IActionResult> Details(string id)
+        {
+            ViewBag.CommentList = _context.Comments
+                .Include(t => t.User)
+                .OrderByDescending(c => c.Content);
+            if (id == null)
+            {
+                return NotFound();
             }
 
-            return View();
+            var thems = await _context.Themses
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (thems == null)
+            {
+                return NotFound();
+            }
+
+            return View(thems);
         }
 
+        #endregion
 
         #region Create
 
-        // GET: Comments/Create
-        public IActionResult Create()
+       public IActionResult Create()
         {
             return View();
         }
@@ -108,5 +108,51 @@ namespace TestWork_8.Controllers
         #endregion
 
 
+        #region Commmmmment
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(string themsId, string userId, string content, Comment comment)
+        {
+            var themS = _context.Themses.FirstOrDefault(c => c.Id == comment.ThemsId);
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var comm = new Comment
+                {
+                    UserId = userId,
+                    ThemsId = themsId,
+                    Content = content,
+                    NameThemsComment = themS.NameThem,
+                    CommentDate = DateTime.Today.Date
+                };
+
+                comm.UserId = user.Id;
+                _context.Add(comm);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
+        #endregion
+
+        #region ShowComment
+
+        public ActionResult ShowComment(int id = 0)
+        {
+            if (id > 0)
+            {
+                Thems thems = _context.Themses.Find(id);
+
+                _context.Add(thems);
+                _context.SaveChanges();
+                return View(_context.Themses.OrderBy(t => t.DateCreateThem));
+            }
+
+            return Redirect("Details");
+        }
+
+
+        #endregion
     }
 }

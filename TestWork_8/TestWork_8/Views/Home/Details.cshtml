@@ -1,0 +1,67 @@
+﻿@model Thems
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="row">
+    <div class="col-md-4">
+        <th>
+            <td>
+                <h4>Название</h4>
+                <h2>@Html.DisplayFor(modelItem => Model.NameThem)</h2>
+            </td>
+            <br/>
+            <hr/>
+            <td>
+                <h4>Содержание</h4>
+                <h3>@Html.DisplayFor(modelItem => Model.ContentThems)</h3>
+            </td>
+        </th>
+
+    </div>
+</div>
+
+<br/>
+<hr/>
+
+
+<div class="row">
+    @foreach (Comment item in ViewBag.CommentList)
+    {
+        <p>@item.User.UserName</p>
+        <h4 style="color: cadetblue"> @item.Content</h4>
+
+        <br/>
+    }
+</div>
+
+
+<div class="row">
+    <p>Оставить комментарий</p>
+    <div class="col-md-12" id="themselves-@Model.Id" style="display: contents; color: darkslategray;">
+        <textarea id="themstext-@Model.Id"></textarea> <br/>
+        <input type="button" id="themComment" onclick="sendComment('@Model.Id', '@Model.UserId')" value="Отправить"/>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        function sendComment(themsId, userId) {
+            $.ajax({
+                url: '@Url.Action("Comment", "Home")',
+                type: 'POST',
+                data: { 'themsId': themsId, 'userId': userId, 'content': $('#themstext-' + themsId).val() },
+                success: function(data) {
+                    setTimeout(function() {
+                            alert('Ваш комментарий ' + '(' + $('#themstext-' + themsId).val() + ')' + ' добавлен!!!',
+                                data)
+                        },
+                        100);
+                },
+                error: function() {
+                    console.log('Ошибка во время отправки комментария', this);
+                }
+            });
+        }
+    </script>
+}
