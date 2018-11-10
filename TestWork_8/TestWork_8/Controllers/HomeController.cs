@@ -99,7 +99,7 @@ namespace TestWork_8.Controllers
                 Id = thems.UserId,
                 NameThem = thems.NameThem,
                 ContentThems = thems.ContentThems,
-                DateCreateThem = DateTime.Today.Date
+                DateCreateThem = DateTime.Now
             };
 
             return tms;
@@ -123,7 +123,7 @@ namespace TestWork_8.Controllers
                     ThemsId = themsId,
                     Content = content,
                     NameThemsComment = themS.NameThem,
-                    CommentDate = DateTime.Today.Date
+                    CommentDate = DateTime.Now
                 };
 
                 comm.UserId = user.Id;
