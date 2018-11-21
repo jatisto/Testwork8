@@ -11,7 +11,7 @@ using TestWork_8.Data;
 namespace TestWork_8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181110123155_init")]
+    [Migration("20181121155933_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

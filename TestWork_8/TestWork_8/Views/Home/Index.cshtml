@@ -19,10 +19,10 @@
 
         @foreach (var item in Model)
         {
-            
+
             <dl class="dl-horizontal">
                 <dt style=" color: darkslategrey">
-                    <h5 style=" color: darkslategrey">Создатель сия темы</h5>
+                    <h5 style=" color: lightgray">Создатель сия темы</h5>
                 </dt>
                 <dd>
 
@@ -30,27 +30,28 @@
 
                 </dd>
                 <dt style=" color: darkslategrey">
-                    <h4 style=" color: darkslategrey">Название</h4>
+                    <h4 style=" color: lightgray">Название</h4>
                 </dt>
                 <dd>
-                    <a href="/Home/Details/@item.Id" style="text-decoration: none"><h4 style="color: crimson">@Html.DisplayFor(modelItem => item.NameThem)</h4></a>
+                    <a href="/Home/Details/@item.Id" style="text-decoration: none"><h4 style="color: blueviolet">@Html.DisplayFor(modelItem => item.NameThem)</h4></a>
                 </dd>
                 <dt style=" color: darkslategrey">
-                    <h4 style=" color: darkslategrey">Содержание</h4>
+                    <h4 style=" color: lightgray">Содержание</h4>
                 </dt>
                 <dd>
                     <h4 style="color: darkgrey">@Html.DisplayFor(modelItem => item.ContentThems)</h4>
                 </dd>
                 <dt style="color: darkslategrey">
-                    <h4 style=" color: darkslategrey">Дата создания</h4>
+                    <h4 style=" color: lightgray">Дата создания</h4>
                 </dt>
                 <dd>
                     <h4 style="color: darkgrey">@Html.DisplayFor(modelItem => item.DateCreateThem)</h4>
                 </dd>
 
             </dl>
-            <hr/>
-            
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <hr />
+
         }
 
     </div>
