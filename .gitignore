@@ -9,7 +9,8 @@
 
 *.jpg
 *.idea/
-#*.vs/
+*.vs/
+*.suo/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

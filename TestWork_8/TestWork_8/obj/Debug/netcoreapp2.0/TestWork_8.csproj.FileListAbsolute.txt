@@ -10,3 +10,15 @@ C:\Users\evgen\GitFolderHome\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreap
 C:\Users\evgen\GitFolderHome\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.AssemblyInfo.cs
 C:\Users\evgen\GitFolderHome\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.dll
 C:\Users\evgen\GitFolderHome\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.pdb
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\bin\Debug\netcoreapp2.0\TestWork_8.deps.json
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\bin\Debug\netcoreapp2.0\TestWork_8.runtimeconfig.json
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\bin\Debug\netcoreapp2.0\TestWork_8.runtimeconfig.dev.json
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\bin\Debug\netcoreapp2.0\TestWork_8.dll
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\bin\Debug\netcoreapp2.0\TestWork_8.pdb
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.csprojAssemblyReference.cache
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.csproj.CoreCompileInputs.cache
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.AssemblyInfoInputs.cache
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.AssemblyInfo.cs
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.dll
+C:\home\Git_work\Testwork8\TestWork_8\TestWork_8\obj\Debug\netcoreapp2.0\TestWork_8.pdb

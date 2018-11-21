@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -61,18 +62,18 @@ namespace TestWork_8.Controllers
 
         #region Create
 
-       public IActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
 
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,NameThem,ContentThems,DateCreateThem")]
             Thems thems)
         {
-
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -88,7 +89,6 @@ namespace TestWork_8.Controllers
         }
 
         #endregion
-
 
         #region CreateThems
 
@@ -107,10 +107,10 @@ namespace TestWork_8.Controllers
 
         #endregion
 
-
         #region Commmmmment
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Comment(string themsId, string userId, string content, Comment comment)
         {
             var themS = _context.Themses.FirstOrDefault(c => c.Id == comment.ThemsId);
@@ -134,6 +134,7 @@ namespace TestWork_8.Controllers
 
             return View();
         }
+
         #endregion
 
         #region ShowComment
@@ -152,6 +153,52 @@ namespace TestWork_8.Controllers
             return Redirect("Details");
         }
 
+        #endregion
+
+        #region Delete
+
+        [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var theme = await _context.Themses
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (theme == null)
+            {
+                return NotFound();
+            }
+
+            return View(theme);
+        }
+
+        // POST: Publications/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            Thems theme = await _context.Themses
+                .SingleOrDefaultAsync(m => m.Id == id);
+            var comm = await _context.Comments.SingleOrDefaultAsync(c => c.ThemsId == id);
+
+            if (theme != null)
+            {
+                _context.Comments.Remove(comm);
+                _context.Themses.Remove(theme);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                _context.Themses.Remove(theme);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
         #endregion
     }
