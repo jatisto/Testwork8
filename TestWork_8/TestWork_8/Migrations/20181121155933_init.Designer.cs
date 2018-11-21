@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using TestWork_8.Data;
 
-namespace TestWork_8.Data.Migrations
+namespace TestWork_8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181110104352_AddPropertyList")]
-    partial class AddPropertyList
+    [Migration("20181121155933_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
